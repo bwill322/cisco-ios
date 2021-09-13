@@ -1,0 +1,18 @@
+SD-NDTH-DEV-DSW02#sh vlan id 15
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+15   Dev-ACL                          active    Gi1/0/7, Gi1/0/11, Gi1/0/12, Gi1/0/13, Gi1/0/14, Gi1/0/15
+                                                Gi1/0/16, Po1
+
+VLAN Type  SAID       MTU   Parent RingNo BridgeNo Stp  BrdgMode Trans1 Trans2
+---- ----- ---------- ----- ------ ------ -------- ---- -------- ------ ------
+15   enet  100015     1500  -      -      -        -    -        0      0
+
+Remote SPAN VLAN
+----------------
+Disabled
+
+Primary Secondary Type              Ports
+------- --------- ----------------- ------------------------------------------
+
