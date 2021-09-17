@@ -4,8 +4,37 @@ Update an interface and change the macro applied to it
 
 
 from __future__ import print_function, unicode_literals
+import os
 from netmiko import Netmiko
 from getpass import getpass
+
+
+def make_changes(data):
+    """
+    :param data: list of config changes to make
+    :return: nothing
+    """
+
+    if len(data) > 0:
+        if os.path.exists("config-changes.txt"):
+            os.remove("config-changes.txt")
+            print("Removed old config-changes.txt file")
+        else:
+            print("No previous config-changes.txt file found, proceeding...")
+
+        with open("config-changes.txt", mode="a", encoding="utf8") as file:
+            for cmd in data:
+                file.write(cmd)
+
+        print("Pushing changes to device...")
+        net_connect.send_config_set(data)
+        print("Changes made, saving config...")
+        save_config = net_connect.send_command_timing("copy running-config startup-config")
+        if "Destination filename [startup-config]" in save_config:
+            net_connect.send_command_timing("\n")
+            print("Saved device configuration")
+        print("-" * 80)
+
 
 hostname = input("Enter hostname: ")
 username = input("Enter username: ")
@@ -56,11 +85,7 @@ for i in range(len(output)):
         proceed = input("Proceed with changes? [y/n]: ")
 
         if 'y' in proceed:
-            print()
-            print("-" * 80)
-            print("Pushing Interface Change....")
-            print("-" * 80)
-            net_connect.send_config_set(config_changes)
+            make_changes(config_changes)
 
             print()
             print("-" * 80)
