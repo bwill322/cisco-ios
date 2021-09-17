@@ -3,9 +3,9 @@ Look for interfaces with errors
 """
 
 from __future__ import print_function, unicode_literals
-from netmiko import Netmiko
+
 from getpass import getpass
-from pprint import pprint
+from netmiko import Netmiko
 
 hostname = input("Enter hostname: ")
 username = input("Enter username: ")
@@ -32,11 +32,7 @@ print("-" * 160)
 for i, element in enumerate(output):
     hardware_type = output[i]['hardware_type']
 
-    if "Ethernet SVI" in hardware_type:
-        continue
-    elif "RP Management Port" in hardware_type:
-        continue
-    else:
+    if "Ethernet SVI" not in hardware_type or "RP Management Port" not in hardware_type:
         intf_name = output[i]['interface']
         input_errors = output[i]['input_errors']
         output_errors = output[i]['output_errors']
