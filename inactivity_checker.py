@@ -127,7 +127,7 @@ for i, element in enumerate(output):
     # if last in/out packet was greater than 3 weeks ago or both are never,
     # interface is eligible to be shutdown
     last_activity_threshold = LAST_INPUT_CONVERTED > 1814400 \
-        or LAST_OUTPUT_CONVERTED > 1814400 or both_never
+        and LAST_OUTPUT_CONVERTED > 1814400 or both_never
 
     # if link and protocol status are down, interface is eligible to be shutdown
     down_down = 'down' in link_status and 'down' in protocol_status
