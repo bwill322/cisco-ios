@@ -4,20 +4,17 @@ Look for interfaces with status of err-disabled
 
 from __future__ import print_function, unicode_literals
 
-import time
-import datetime
-import re
-import os
 from getpass import getpass
 from netmiko import Netmiko
+import login_tools
 
-hostname = input("Enter hostname: ")
-username = input("Enter username: ")
+hostname = login_tools.get_input("Enter hostname: ")
+username, password = login_tools.get_credentials()
 
 device = {
     'host': hostname,
     'username': username,
-    'password': getpass(),
+    'password': password,
     'device_type': 'cisco_ios'
 }
 

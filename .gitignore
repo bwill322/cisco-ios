@@ -1,2 +1,5 @@
 /config-changes.txt
 /devices.txt
+/netbox_tools.py
+/login_tools.py
+/check_route.py
